@@ -1,0 +1,51 @@
+@echo off
+
+REM 1. Create Directory
+md FirstProject
+
+REM 2. Create Project Structure
+cd "FirstProject"
+
+REM 3. Create sln Project in src folder
+cd "src"
+dotnet new sln -n FirstProject
+cd ..
+
+REM 4. Create Web API Project in src folder
+cd "src"
+dotnet new console --name "WebApiProject"
+cd ..
+
+REM 5. Create Domain in src folder
+cd "src"
+dotnet new console --name "FirstProject.Domain"
+cd ..
+
+REM 6. Create Test Directory
+md Tests
+
+REM 7. WebApiProject Test
+cd "Tests"
+dotnet new xunit --name "WebApiProject.Tests"
+cd "WebApiProject.Tests"
+
+REM 8. Domain Test
+cd ..
+dotnet new xunit --name "Domain.Tests"
+cd "Domain.Tests"
+
+REM 9. Build the Project
+cd ..
+dotnet build
+
+REM 10. Git Commit
+git init
+git add -A
+git commit -m "FirstProject"
+
+REM 11. Set Upstream and Push to Remote
+git remote add origin https://github.com/Afsanehonarmand/FirstProject.git
+git branch -M main
+git push -u origin main
+
+echo "Script execution completed."
